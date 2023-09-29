@@ -15,6 +15,8 @@ public class vector3 : MonoBehaviour
     //prefab projectile
     public GameObject bulletPreFab;
 
+    
+
     //bullet Spawn here
     public Transform bulletSpawnPoint;
 
@@ -24,7 +26,7 @@ public class vector3 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        StartCoroutine(SpawnBullet());
     }
 
     // Update is called once per frame
@@ -34,19 +36,20 @@ public class vector3 : MonoBehaviour
 
         var targets = GameObject.FindGameObjectsWithTag("Enemy");
 
-        foreach(var target in targets)
+        foreach (var target in targets)
         {
             float dist = Vector3.Distance(transform.position, target.transform.position);
 
             if (dist <= rangeValue)
             {
-                Quaternion lookOnLook = Quaternion.LookRotation(targetA.transform.position - transform.position); 
-                transform.rotation = Quaternion.Slerp(transform.rotation, lookOnLook, rotSpeed * Time.deltaTime);
+                transform.LookAt(target.transform.position);
             }
+
+          
         }
 
-        SpawnBullet();
-      
+        
+
 
 
 
@@ -67,9 +70,9 @@ public class vector3 : MonoBehaviour
         while (true)
         {
             GameObject Bullet = Instantiate(bulletPreFab, bulletSpawnPoint.position, Quaternion.identity);
-            yield return new WaitForSeconds(bulletSpawnTime);
             Rigidbody rb = Bullet.GetComponent<Rigidbody>();
             rb.velocity = transform.forward * bulletSpeed;
+            yield return new WaitForSeconds(bulletSpawnTime);
         }
     }
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
@@ -13,6 +14,12 @@ public class EnemyScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        var player = GameObject.FindGameObjectWithTag("Player");
+        var currentColor = player.GetComponent<ColorManager>().color;
+
+        var meshRenderer = GetComponent<MeshRenderer>();
+
+        meshRenderer.material.color = currentColor[Random.Range(0, currentColor.Count)];
         pointB = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
