@@ -14,7 +14,7 @@ public class vector3 : MonoBehaviour
     public float bulletSpawnTime;
     //prefab projectile
     public GameObject bulletPreFab;
-
+    
     
 
     //bullet Spawn here

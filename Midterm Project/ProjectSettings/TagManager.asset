@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - Bullets
   - Bullet
+  - gameOver
+  - Hitbox
   layers:
   - Default
   - TransparentFX

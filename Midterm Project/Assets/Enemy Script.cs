@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
@@ -9,6 +10,8 @@ public class EnemyScript : MonoBehaviour
     public float moveSpeed;
     public float rangeValue;
     public float rotSpeed;
+    public GameObject gameOver;
+    public Rigidbody rigidBody;
  
 
     // Start is called before the first frame update
@@ -21,6 +24,9 @@ public class EnemyScript : MonoBehaviour
 
         meshRenderer.material.color = currentColor[Random.Range(0, currentColor.Count)];
         pointB = GameObject.FindGameObjectWithTag("Player").transform;
+        gameOver = GameObject.FindGameObjectWithTag("gameOver").gameObject;
+
+        gameOver.SetActive(false);
     }
 
     // Update is called once per frame
@@ -43,5 +49,15 @@ public class EnemyScript : MonoBehaviour
         Vector3 relativePos = pointB.position - transform.position;
         Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotSpeed * Time.deltaTime);
+    }
+
+    public void OnTriggerEnter(Collider collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            gameOver.SetActive(true);
+            Destroy(collision.gameObject);
+            
+        }
     }
 }
