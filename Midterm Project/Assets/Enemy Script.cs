@@ -56,7 +56,7 @@ public class EnemyScript : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             gameOver.SetActive(true);
-            Destroy(collision.gameObject);
+            Destroy(collision.gameObject);x`
             
         }
     }
