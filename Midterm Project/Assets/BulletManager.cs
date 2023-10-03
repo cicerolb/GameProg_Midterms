@@ -25,11 +25,13 @@ public class BulletManager : MonoBehaviour
     }
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.CompareTag("Enemy") && collision.GetComponent<MeshRenderer>().material.color.Equals(meshRenderer.material.color))
+        if (collision.CompareTag("Enemy") && collision.GetComponent<EnemyScript>().meshRenderer.material.color.Equals(meshRenderer.material.color))
         {
             Destroy(collision.gameObject);
 
         }
+
+        Destroy(gameObject);
 
 
 

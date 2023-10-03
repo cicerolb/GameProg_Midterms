@@ -14,8 +14,9 @@ public class vector3 : MonoBehaviour
     public float bulletSpawnTime;
     //prefab projectile
     public GameObject bulletPreFab;
-    
-    
+
+
+    public GameObject gameOver;
 
     //bullet Spawn here
     public Transform bulletSpawnPoint;
@@ -27,6 +28,7 @@ public class vector3 : MonoBehaviour
     void Start()
     {
         StartCoroutine(SpawnBullet());
+        gameOver.SetActive(false);
     }
 
     // Update is called once per frame
@@ -99,10 +101,18 @@ public class vector3 : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotSpeed * Time.deltaTime);
     }
 
-    
 
 
-   
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            gameOver.SetActive(true);
+            Destroy(gameObject);
+
+        }
+    }
 
 
 }
