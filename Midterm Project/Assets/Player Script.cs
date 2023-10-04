@@ -15,6 +15,10 @@ public class vector3 : MonoBehaviour
     //prefab projectile
     public GameObject bulletPreFab;
 
+   
+
+    public float rotationSpeed;
+
 
     public GameObject gameOver;
 
@@ -29,6 +33,7 @@ public class vector3 : MonoBehaviour
     {
         StartCoroutine(SpawnBullet());
         gameOver.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -45,6 +50,9 @@ public class vector3 : MonoBehaviour
             if (dist <= rangeValue)
             {
                 transform.LookAt(target.transform.position);
+
+                //transform.rotation = Quaternion.Slerp(transform.rotation, target.transform.rotation, 
+                //    rotationSpeed * Time.deltaTime);
             }
 
           
@@ -57,13 +65,12 @@ public class vector3 : MonoBehaviour
 
         //QuaternionRotateTowards();
 
-        if (Input.GetKeyDown(KeyCode.Space))
+     /*   if (Input.GetKeyDown(KeyCode.Space))
         {
             GameObject Bullet = Instantiate(bulletPreFab, bulletSpawnPoint.position, Quaternion.identity);
             Rigidbody rb = Bullet.GetComponent<Rigidbody>();
             rb.velocity = transform.forward * bulletSpeed;
-        }
-
+        }*/
 
     }
 
